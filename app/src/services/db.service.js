@@ -1,11 +1,12 @@
-// const rethink = require("rethinkdb");
+const mongoose = require("mongoose");
 
 const log = require("../utils/logger");
 
-const RETHINK_CONFIG = {
-    host: global.process.env.DB_HOST,
-    port: global.process.env.DB_PORT,
-    db: global.process.env.DB_NAME
+const DB_CONFIG = {
+    uri: global.process.env.DB_URI,
+    options: {
+        useNewUrlParser: true
+    }
 };
 
 module.exports = {
@@ -15,12 +16,10 @@ module.exports = {
 
 
 async function createConnection$() {
-    return await initRethink();
+    return await initMongo();
 }
 
-async function initRethink() {
-    await new Promise((r) => setTimeout(r, 300))
-    // const connect = await rethink.connect(RETHINK_CONFIG)
-    // log.info("RethinkDB is connected!")
-    // return rethink._connection = connect;
+async function initMongo() {
+    await mongoose.connect(DB_CONFIG.uri, DB_CONFIG.options);
+    log.debug("MongoDB is connected!")
 }
