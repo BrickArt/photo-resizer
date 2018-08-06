@@ -14,10 +14,10 @@ module.exports = {
 };
 
 async function createConnection$() {
-    return await initMongo();
+    return await initMongo$();
 }
 
-async function initMongo() {
+async function initMongo$() {
     await mongoose.connect(DB_CONFIG.uri, DB_CONFIG.options);
     log.debug("MongoDB is connected!")
 }
