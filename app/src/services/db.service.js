@@ -13,8 +13,6 @@ module.exports = {
     createConnection$
 };
 
-
-
 async function createConnection$() {
     return await initMongo();
 }
