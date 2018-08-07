@@ -2,7 +2,7 @@ const router = require("express").Router();
 const asyncWrap = require("./utils/async");
 
 const uploadMiddleware = require("./middleware/upload.middleware");
-// const auth = require("./middleware/auth.middleware");
+const auth = require("./middleware/auth.middleware");
 
 const authRoute = require("./routes/auth.route");
 const imageRoute = require("./routes/image.route");
@@ -13,12 +13,10 @@ router.post("/signup", asyncWrap(authRoute.registration$));
 
 // IMAGE
 router.route("/image")
-    .post(uploadMiddleware, imageRoute.uploadImage)
-    .get()
+    .post(uploadMiddleware, asyncWrap(imageRoute.uploadImage$))
+    .get(auth, asyncWrap(imageRoute.getResized$))
 
 
-router.get("/", (req, res, next) => {
-    res.status(200).json("Hello!")
-})
+
 
 module.exports = router;
