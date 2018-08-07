@@ -21,6 +21,7 @@
     "morgan": "^1.9.0",
     "multer": "^1.3.1",
     "multer-storage-cloudinary": "^2.2.1",
+    "request": "^2.87.0",
     "winston": "^3.0.0",
     "xor-crypt": "^1.1.1"
   }
